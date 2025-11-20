@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign2Text ArSL Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js"></script>
+</head>
+
+<body>
+  <main>
+    <h1>Sign2Text – Arabic Sign Language (Word-Level)</h1>
+    <p>
+      Browser client that extracts MediaPipe landmarks, buffers 32 frames, and queries the FastAPI backend for predictions.
+    </p>
+    <section class="video-wrapper">
+      <video id="input-video" autoplay playsinline></video>
+      <canvas id="output-canvas"></canvas>
+      <div id="status-overlay">Initializing...</div>
+    </section>
+    <section class="prediction-panel">
+      <div><strong>Prediction:</strong> <span id="prediction">–</span></div>
+      <div><strong>Confidence:</strong> <span id="confidence">–</span></div>
+    </section>
+    <section class="controls">
+      <label>
+        Backend URL
+        <input id="api-url" type="text" value="http://localhost:8000/predict" />
+      </label>
+      <div class="control-buttons">
+        <button id="record-button">Start Recording</button>
+        <button id="predict-button" disabled>Show Prediction</button>
+        <button id="reset-button">Reset</button>
+      </div>
+    </section>
+    <section class="progress-panel">
+      <div class="progress-label">Frame Collection Progress</div>
+      <div class="progress-bar">
+        <div id="progress-fill"></div>
+      </div>
+    </section>
+    <section class="log">
+      <h2>Log</h2>
+      <pre id="log-output"></pre>
+    </section>
+    <dialog id="prediction-dialog">
+      <h2>Predicted Word</h2>
+      <p id="dialog-prediction">–</p>
+      <p id="dialog-confidence">–</p>
+      <button id="dialog-close">Close</button>
+    </dialog>
+  </main>
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>
